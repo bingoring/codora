@@ -1,0 +1,190 @@
+{
+  "name": "codora",
+  "displayName": "Codora",
+  "description": "🗺️ Code Explorer - Interactive guide for understanding complex codebases like Dora explores new territories",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "categories": [
+    "Other",
+    "Education"
+  ],
+  "keywords": [
+    "code explorer",
+    "code guide",
+    "dora",
+    "tutorial",
+    "learning",
+    "code understanding",
+    "interactive",
+    "ai"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codora.startExploration",
+        "title": "🗺️ Start Code Exploration",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.startExplorationFromHover",
+        "title": "🚀 Start Exploration from Hover",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.showQuickInfo",
+        "title": "🔍 Show Quick Info",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.openConfiguration",
+        "title": "🔧 Open Configuration",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.testWebview",
+        "title": "🧪 Test Webview Panel",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.showUsageStats",
+        "title": "📊 Show Usage Statistics",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.clearCache",
+        "title": "🗑️ Clear Cache",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.refreshConfig",
+        "title": "🔄 Refresh Configuration",
+        "category": "Codora"
+      }
+    ],
+    "configuration": {
+      "title": "Codora",
+      "properties": {
+        "codora.aiService.provider": {
+          "type": "string",
+          "enum": [
+            "openai",
+            "anthropic",
+            "local"
+          ],
+          "default": "openai",
+          "description": "AI service provider for code explanations"
+        },
+        "codora.aiService.model": {
+          "type": "string",
+          "description": "Specific model to use (e.g., gpt-4, claude-3-sonnet-20240229, llama2)"
+        },
+        "codora.aiService.apiKey": {
+          "type": "string",
+          "description": "API key for OpenAI or other providers"
+        },
+        "codora.aiService.anthropicKey": {
+          "type": "string",
+          "description": "API key for Anthropic Claude"
+        },
+        "codora.aiService.baseUrl": {
+          "type": "string",
+          "description": "Base URL for local models or custom endpoints"
+        },
+        "codora.aiService.maxTokens": {
+          "type": "number",
+          "default": 1000,
+          "minimum": 100,
+          "maximum": 4000,
+          "description": "Maximum tokens for AI responses"
+        },
+        "codora.aiService.temperature": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Temperature for AI responses (0.0-2.0)"
+        },
+        "codora.aiService.budgetLimit": {
+          "type": "number",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "Monthly budget limit in USD"
+        },
+        "codora.aiService.preferCheaperModels": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prefer cheaper models when possible to reduce costs"
+        },
+        "codora.aiService.enableBatching": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable request batching for cost optimization"
+        },
+        "codora.aiService.budgetResetType": {
+          "type": "string",
+          "enum": [
+            "clear",
+            "archive"
+          ],
+          "default": "archive",
+          "description": "How to handle old usage data when resetting budget"
+        },
+        "codora.features.autoExplain": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically provide explanations when hovering over code"
+        },
+        "codora.features.contextAware": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use surrounding code context for better explanations"
+        },
+        "codora.features.cacheExplanations": {
+          "type": "boolean",
+          "default": false,
+          "description": "Cache explanations locally to reduce API calls"
+        },
+        "codora.features.showHoverButtons": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show exploration buttons when hovering over code symbols"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "codora.startExploration",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "@vscode/test-electron": "^2.2.0",
+    "eslint": "^8.28.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.1.0",
+    "typescript": "^4.9.5"
+  }
+}

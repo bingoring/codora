@@ -1,0 +1,26 @@
+# Dependency directories
+node_modules/
+out/
+dist/
+
+# VS Code
+.vscode/
+*.vsix
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Coverage / caches
+coverage/
+.nyc_output/
+
+# Env
+.env
+.env.*.local
