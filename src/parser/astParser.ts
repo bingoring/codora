@@ -191,13 +191,13 @@ export class ASTParser {
     }
 
     private extractNodeInformation(node: ts.Node, scope: ScopeInfo): void {
-        if (!this.sourceFile) return;
+        if (!this.sourceFile) {return;}
 
         const pos = this.sourceFile.getLineAndCharacterOfPosition(node.getStart());
         const lineNum = pos.line;
         const context = this.lineContextCache.get(lineNum);
 
-        if (!context) return;
+        if (!context) {return;}
 
         // Extract variable declarations
         if (ts.isVariableDeclaration(node)) {
@@ -264,8 +264,8 @@ export class ASTParser {
     private getVariableKind(node: ts.VariableDeclaration): VariableInfo['kind'] {
         const parent = node.parent;
         if (ts.isVariableDeclarationList(parent)) {
-            if (parent.flags & ts.NodeFlags.Const) return 'const';
-            if (parent.flags & ts.NodeFlags.Let) return 'let';
+            if (parent.flags & ts.NodeFlags.Const) {return 'const';}
+            if (parent.flags & ts.NodeFlags.Let) {return 'let';}
             return 'var';
         }
         return 'var';
@@ -307,7 +307,7 @@ export class ASTParser {
 
     public getVariablesInScope(lineNumber: number): VariableInfo[] {
         const context = this.lineContextCache.get(lineNumber);
-        if (!context) return [];
+        if (!context) {return [];}
 
         const variables: VariableInfo[] = [];
         let currentScope: ScopeInfo | undefined = context.scope;
@@ -335,7 +335,7 @@ export class ASTParser {
 
     public isInFunctionBody(lineNumber: number): boolean {
         const context = this.lineContextCache.get(lineNumber);
-        if (!context) return false;
+        if (!context) {return false;}
 
         return context.nodes.some(node =>
             node.kindName === 'Block' ||
@@ -365,7 +365,7 @@ export class ASTParser {
         const funcContext = this.lineContextCache.get(func.line);
         const lineContext = this.lineContextCache.get(lineNumber);
 
-        if (!funcContext || !lineContext) return false;
+        if (!funcContext || !lineContext) {return false;}
 
         return lineNumber > func.line && lineContext.indentLevel > funcContext.indentLevel;
     }
