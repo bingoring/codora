@@ -12,6 +12,23 @@
 ### 🎯 Mission
 Transform how developers understand code by providing AI-powered, interactive explanations that make complex codebases accessible to everyone.
 
+## 🧠 Core Philosophy: Semantic Over Syntactic
+
+### ❌ What We Don't Do
+- **Line-by-line meaningless parsing**: "Line 45: function declaration"
+- **Syntax description**: "This is a for loop with three parameters"
+- **Academic explanations**: "This demonstrates the observer pattern"
+- **Generic AI responses**: "This code appears to be handling user data"
+
+### ✅ What We Provide
+- **Purpose-driven analysis**: "Validates email format and sends welcome email to new users"
+- **Business context**: "This ensures proper user onboarding and reduces support tickets"
+- **Practical insights**: "Throws ValidationError if email is invalid, updates user_status to 'verified'"
+- **Instant understanding**: "Configuration object for payment processing with Stripe integration"
+
+### 🎯 User Value First
+Every interaction must provide **immediate, actionable understanding** of what code does and why it exists. No feature ships unless it makes developers faster at understanding unfamiliar code.
+
 ---
 
 ## 🏗️ Development Phases
@@ -87,238 +104,264 @@ interface AIConfiguration {
 
 ---
 
-### 🧠 **Phase 3: Core AI Integration** (REVISED)
-**Duration**: 3-4 weeks | **Status**: 🔮 Planned
+### 🧠 **Phase 3: Block-Based Semantic Analysis** (COMPLETELY REDESIGNED)
+**Duration**: 3-4 weeks | **Status**: 🔮 Next Priority
 
-#### AI-Powered Code Analysis
-- **Smart Code Understanding**
-  - Context-aware code explanations
-  - Natural language descriptions
-  - Dependency relationship mapping
-  - Code pattern recognition
-  - Intent detection algorithms
+#### Problem Statement
+Current line-by-line analysis is meaningless. Users need **semantic understanding** of what code blocks DO, not syntactic parsing of what they ARE.
 
-- **Task Decomposition Engine**
-  - Complex analysis → smaller, focused queries
-  - Cheaper model routing for simple tasks
-  - Response aggregation strategies
-  - Quality validation pipelines
-  - Error handling and retry logic
+#### Core Semantic Engine
+- **Meaningful Code Block Detection**
+  - Function calls, method chains, class instantiations
+  - Control structures (if/else, loops, try/catch)
+  - Variable assignments with business logic
+  - Import statements and their usage context
+  - Complete expressions, not individual tokens
 
-#### Cost Optimization Strategies
-```typescript
-interface TaskDecomposition {
-  // Route simple tasks to cheaper models
-  simpleExplanations: 'gpt-3.5-turbo' | 'claude-haiku';
+- **Purpose-Driven Analysis**
+  ```typescript
+  interface SemanticBlock {
+    type: 'function_call' | 'method_chain' | 'class_definition' | 'control_flow';
+    purpose: string; // What does this block accomplish?
+    dependencies: string[]; // What does it depend on?
+    effects: string[]; // What changes does it make?
+    businessLogic: string; // Why does this exist?
+    parameters: ParameterAnalysis[];
+    returnValue: ReturnAnalysis;
+  }
+  ```
 
-  // Complex analysis uses premium models
-  architecturalAnalysis: 'gpt-4-turbo' | 'claude-opus';
+- **Smart Block Hierarchy**
+  - Find the smallest meaningful block under cursor
+  - Expand to larger contexts when needed
+  - Never break semantically related code apart
 
-  // Aggregate responses intelligently
-  aggregationStrategy: 'consensus' | 'weighted' | 'hierarchical';
+#### Interactive Selection System
+- **Cmd+Shift Hover Detection**
+  - Real-time semantic block highlighting
+  - Visual feedback showing selectable boundaries
+  - Preview of available analysis depth
+  - Smart cursor positioning
 
-  // Token optimization
-  tokenOptimization: {
-    compression: boolean;
-    contextWindow: number;
-    responseLength: 'short' | 'medium' | 'detailed';
-  };
-}
-```
-
-#### Response Processing
-- **Intelligent Aggregation**
-  - Multi-model consensus building
-  - Confidence scoring algorithms
-  - Response quality validation
-  - Incremental explanation building
-  - Context preservation across requests
+- **One-Click Deep Dive**
+  ```typescript
+  interface BlockAnalysis {
+    quickSummary: string; // "Validates user input and saves to database"
+    whatItDoes: string; // Functional purpose
+    howItWorks: string; // Implementation approach
+    dependencies: CodeDependency[]; // What it uses
+    sideEffects: string[]; // What changes
+    examples: UsageExample[]; // How to use it
+    relatedCode: RelatedBlock[]; // Connected functionality
+  }
+  ```
 
 #### Key Deliverables
-- AI explanation generation engine
-- Task decomposition system
-- Response aggregation pipeline
-- Cost optimization algorithms
-- Quality assurance framework
+- Semantic block detection engine
+- Cmd+Shift interactive selection
+- Purpose-first analysis framework
+- One-click exploration interface
+- Smart context expansion system
 
 ---
 
-### 🔗 **Phase 4: Advanced AI Patterns** (NEW)
+### 🔗 **Phase 4: AI-Powered Code Intelligence** (REDESIGNED)
 **Duration**: 4-5 weeks | **Status**: 🔮 Planned
 
-#### LangChain/LangGraph Integration
-- **Chain Architecture**
+#### Instant Code Understanding
+- **Function Purpose Detection**
   ```typescript
-  interface ExplanationChain {
-    // Sequential processing chains
-    codeAnalysis: AnalysisChain;
-    contextGathering: ContextChain;
-    explanationGeneration: ExplanationChain;
-    qualityAssurance: ValidationChain;
-
-    // Graph-based workflows
-    explorationGraph: LangGraph<ExplorationState>;
-    dependencyGraph: LangGraph<DependencyState>;
-    learningGraph: LangGraph<LearningState>;
+  interface FunctionIntelligence {
+    // Replace "function declaration" with actual purpose
+    purpose: "Validates email format and sends welcome email";
+    businessValue: "Ensures new users receive proper onboarding";
+    inputExpectation: "User object with email and name fields";
+    outputBehavior: "Returns success status, throws ValidationError on failure";
+    sideEffects: ["Database update", "Email sent", "Analytics tracked"];
   }
   ```
 
-- **Advanced Patterns**
-  - Retrieval-Augmented Generation (RAG) for code context
-  - Chain-of-thought reasoning for complex explanations
-  - Self-reflection and correction mechanisms
-  - Multi-agent collaboration patterns
-  - Tool integration (AST parsers, linters, documentation)
-
-#### Agent Orchestration System
-- **Specialized AI Agents**
-  - **Analyst Agent**: Code structure and pattern analysis
-  - **Explainer Agent**: Natural language explanation generation
-  - **Context Agent**: Dependency and relationship mapping
-  - **Quality Agent**: Explanation validation and improvement
-  - **Learning Agent**: User interaction and preference learning
-
-- **Orchestration Layer**
+- **Variable Role Analysis**
   ```typescript
-  interface AgentOrchestrator {
-    agents: {
-      analyst: AnalystAgent;
-      explainer: ExplainerAgent;
-      context: ContextAgent;
-      quality: QualityAgent;
-      learning: LearningAgent;
-    };
-
-    workflow: {
-      parallel: ParallelExecution[];
-      sequential: SequentialExecution[];
-      conditional: ConditionalLogic[];
-    };
-
-    coordination: {
-      messageRouting: MessageRouter;
-      stateManagement: StateManager;
-      conflictResolution: ConflictResolver;
-    };
+  interface VariableIntelligence {
+    // Replace "variable declaration" with actual role
+    role: "Configuration object for payment processing";
+    lifecycle: "Created once at module load, reused across requests";
+    dependencies: ["environment variables", "payment provider API"];
+    mutability: "Immutable after initialization";
+    criticalPath: boolean; // Is this essential for core functionality?
   }
   ```
+
+#### Type System Intelligence
+- **Smart Type Inference**
+  - Show actual data shapes, not just TypeScript types
+  - Runtime behavior analysis
+  - Example values and common patterns
+  - Error conditions and edge cases
+
+- **Contextual Type Information**
+  ```typescript
+  interface TypeIntelligence {
+    declaredType: string; // What TypeScript says
+    actualShape: object; // What the data actually looks like
+    commonValues: string[]; // Typical values seen in practice
+    errorCases: string[]; // What breaks this type
+    validation: string[]; // How it gets validated
+  }
+  ```
+
+#### Code Flow Understanding
+- **Execution Path Analysis**
+  - What happens when this code runs?
+  - What are the possible outcomes?
+  - Where does data come from and go to?
+  - What can go wrong and how?
+
+- **Business Logic Extraction**
+  - Why does this code exist?
+  - What business problem does it solve?
+  - How does it fit into the larger system?
+  - What would happen if it broke?
 
 #### Key Deliverables
-- LangChain integration framework
-- Multi-agent orchestration system
-- Advanced reasoning pipelines
-- Tool integration architecture
-- Performance optimization layer
+- Function purpose detection engine
+- Variable role analysis system
+- Type intelligence with examples
+- Business logic extraction
+- Execution flow mapping
 
 ---
 
-### 🧩 **Phase 5: Multi-Tier Memory Systems** (NEW)
+### 🧩 **Phase 5: Smart Context Memory** (REDESIGNED)
 **Duration**: 3-4 weeks | **Status**: 🔮 Planned
 
-#### Memory Architecture
-- **Short-Term Memory (Session)**
-  - Current exploration context
-  - Recently analyzed code symbols
-  - User interaction patterns
-  - Active conversation state
-  - Temporary insights and connections
+#### Problem Statement
+Users need instant access to learned context about their codebase without re-analyzing the same code blocks repeatedly.
 
-- **Medium-Term Memory (Project)**
-  - Project-specific knowledge graph
-  - Code architecture understanding
-  - User preferences for this codebase
-  - Historical explanation quality
-  - Team collaboration patterns
+#### Project Memory System
+- **Function Purpose Cache**
+  ```typescript
+  interface FunctionMemory {
+    signature: string;
+    lastAnalyzed: Date;
+    purpose: string; // "Validates user input and saves to database"
+    businessLogic: string; // Why it exists
+    dependencies: string[]; // What it needs
+    sideEffects: string[]; // What it changes
+    confidence: number; // How sure we are about this analysis
+  }
+  ```
 
-- **Long-Term Memory (Global)**
-  - Cross-project patterns and insights
-  - User learning progression
-  - Code pattern library
-  - Best explanation templates
-  - Model performance history
+- **Variable Role Tracking**
+  ```typescript
+  interface VariableMemory {
+    name: string;
+    scope: string;
+    role: string; // "Configuration object for payment processing"
+    lifecycle: string; // When it's created and destroyed
+    criticalPath: boolean; // Essential for core functionality?
+    usagePatterns: string[]; // How it's typically used
+  }
+  ```
 
-#### Memory Implementation
-```typescript
-interface MemorySystem {
-  shortTerm: {
-    sessionContext: SessionMemory;
-    explorationHistory: ExplorationMemory[];
-    activeConnections: ConnectionGraph;
-    userInteractions: InteractionLog[];
-  };
+#### Smart Context Retrieval
+- **Related Code Discovery**
+  - Functions that work together
+  - Variables that flow through multiple functions
+  - Error handling patterns across the codebase
+  - Configuration dependencies
 
-  mediumTerm: {
-    projectKnowledge: ProjectKnowledgeGraph;
-    codebaseMapping: ArchitectureMap;
-    userPreferences: ProjectPreferences;
-    qualityMetrics: QualityHistory;
-  };
+- **Learning from User Behavior**
+  - Which explanations were helpful vs ignored
+  - What level of detail users prefer
+  - Which parts of code they explore most
+  - Common confusion points
 
-  longTerm: {
-    userProfile: UserLearningProfile;
-    patternLibrary: CodePatternDatabase;
-    explanationTemplates: TemplateLibrary;
-    globalInsights: CrossProjectInsights;
-  };
-}
-```
+#### Instant Context Loading
+- **Zero-Delay Information**
+  - Pre-compute common analysis for frequently viewed code
+  - Cache semantic blocks and their purposes
+  - Remember user's exploration patterns
+  - Predict what they want to understand next
 
-#### Advanced Features
-- **Knowledge Graph Construction**
-  - Automatic relationship discovery
-  - Semantic similarity mapping
-  - Context propagation algorithms
-  - Incremental learning mechanisms
-  - Forgetting and relevance decay
-
-- **Adaptive Learning**
-  - User feedback incorporation
-  - Explanation quality optimization
-  - Personalized content delivery
-  - Collaborative filtering
-  - Continuous model improvement
+- **Progressive Detail Loading**
+  ```typescript
+  interface ContextLevels {
+    quickGlance: string; // "Handles user authentication"
+    detailedView: string; // Full explanation with examples
+    deepDive: string; // Complete analysis with dependencies
+    relatedCode: CodeBlock[]; // Connected functionality
+  }
+  ```
 
 #### Key Deliverables
-- Multi-tier memory architecture
-- Knowledge graph implementation
-- Adaptive learning algorithms
-- Memory persistence layer
-- Privacy and security framework
+- Function purpose cache system
+- Variable role tracking
+- Smart context retrieval
+- Progressive detail loading
+- User behavior learning engine
 
 ---
 
-### 🚀 **Phase 6: Enhanced Navigation** (REVISED)
+### 🚀 **Phase 6: Interactive Block Explorer** (REDESIGNED)
 **Duration**: 2-3 weeks | **Status**: 🔮 Planned
 
-#### Advanced Code Navigation
-- **AI-Enhanced AST Parsing**
-  - Deep syntactic analysis with AI insights
-  - Semantic relationship mapping
-  - Intent-driven code exploration
-  - Smart breadcrumb generation
-  - Context-aware symbol highlighting
+#### Problem Statement
+Users need intuitive interaction patterns to explore code blocks without breaking their flow state.
 
-- **Intelligent Flow Navigation**
-  - Line-by-line AI explanations
-  - Control flow visualization
-  - Data flow tracking with AI insights
-  - Dependency chain exploration
-  - Interactive code journey mapping
+#### Cmd+Shift Interactive System
+- **Hover-to-Highlight**
+  ```typescript
+  interface InteractiveSelection {
+    modifierKey: 'Cmd+Shift'; // Cross-platform: Ctrl+Shift on Windows/Linux
+    hoverFeedback: {
+      highlightBoundary: 'semantic_block'; // Not arbitrary lines
+      previewTooltip: string; // "Click to analyze: orderService.processOrder()"
+      visualDepth: 'shallow' | 'medium' | 'deep'; // Show analysis depth
+    };
+    clickAction: 'open_explorer'; // One-click opens Codora Explorer
+  }
+  ```
 
-#### Smart Features
-- **Predictive Navigation**
-  - Next-symbol prediction based on user patterns
-  - Related code suggestions
-  - Exploration path optimization
-  - Learning-based recommendations
-  - Context-sensitive shortcuts
+- **Smart Block Detection**
+  - Find the most specific meaningful block under cursor
+  - Avoid highlighting syntax fragments like `(` or `)`
+  - Prioritize user-relevant blocks (function calls over punctuation)
+  - Visual feedback for nestable blocks
+
+#### Codora Explorer Enhancement
+- **Instant Deep Dive**
+  - Opens immediately on click, no loading delay
+  - Shows cached analysis if available
+  - Displays purpose, not syntax description
+  - Provides actionable insights, not academic explanations
+
+- **Related Code Navigation**
+  - Jump to function definitions with one click
+  - Show all places where this function is called
+  - Navigate to related configuration or dependencies
+  - Trace data flow through the system
+
+#### Flow State Preservation
+- **Non-Intrusive Design**
+  - Hover feedback doesn't block code view
+  - Explorer panel slides in smoothly
+  - Quick dismiss with Escape key
+  - Remember panel position and size
+
+- **Context Switching**
+  - Multiple explorers for different code blocks
+  - Tab between active explorations
+  - History of recently analyzed blocks
+  - Quick jump back to previous analysis
 
 #### Key Deliverables
-- Enhanced AST parser with AI integration
-- Predictive navigation engine
-- Smart flow visualization
-- Context-aware UI components
-- Performance-optimized rendering
+- Cmd+Shift hover detection system
+- Smart semantic block highlighting
+- One-click Codora Explorer opening
+- Flow-state preserving UI
+- Multi-block exploration tabs
 
 ---
 
@@ -418,47 +461,65 @@ interface BudgetControl {
 
 ## 🏗️ Technical Architecture
 
-### System Architecture
+### Semantic-First System Architecture
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Codora Extension                         │
+│                 Codora Extension                            │
 ├─────────────────────────────────────────────────────────────┤
-│  UI Layer                                                   │
-│  ├─ Hover Provider        ├─ WebView Panel                  │
-│  ├─ Command Palette       ├─ Settings Interface             │
-│  └─ Status Bar           └─ Progress Indicators            │
+│  Interactive Selection Layer                                │
+│  ├─ Cmd+Shift Detection   ├─ Smart Block Highlighting       │
+│  ├─ Semantic Boundaries   ├─ One-Click Deep Dive           │
+│  └─ Flow State Preservation                                │
 ├─────────────────────────────────────────────────────────────┤
-│  AI Orchestration Layer                                     │
-│  ├─ Task Decomposer       ├─ Response Aggregator           │
-│  ├─ Model Router          ├─ Quality Validator             │
-│  ├─ Cost Controller       └─ Cache Manager                 │
+│  Purpose Intelligence Engine                                │
+│  ├─ Function Purpose      ├─ Variable Role Analysis        │
+│  ├─ Business Logic        ├─ Type Intelligence             │
+│  └─ Execution Flow       └─ Error Condition Mapping       │
 ├─────────────────────────────────────────────────────────────┤
-│  Memory System                                              │
-│  ├─ Short-Term (Session)  ├─ Medium-Term (Project)         │
-│  ├─ Long-Term (Global)    └─ Knowledge Graph               │
+│  Smart Context Memory                                       │
+│  ├─ Function Purpose Cache ├─ Variable Role Tracking       │
+│  ├─ User Behavior Learning ├─ Progressive Detail Loading   │
+│  └─ Related Code Discovery                                 │
 ├─────────────────────────────────────────────────────────────┤
-│  AI Provider Layer                                          │
-│  ├─ OpenAI Connector      ├─ Anthropic Connector           │
-│  ├─ Local Model Interface ├─ Azure OpenAI                  │
-│  └─ Custom API Gateway   └─ Fallback Systems              │
+│  AI Understanding Layer                                     │
+│  ├─ Purpose Detection     ├─ Context Optimization          │
+│  ├─ Business Value        ├─ Example Generation            │
+│  └─ Cost Optimization    └─ Quality Validation             │
 ├─────────────────────────────────────────────────────────────┤
-│  Core Engine                                                │
-│  ├─ Symbol Extractor      ├─ AST Parser                    │
-│  ├─ Context Builder       ├─ Dependency Analyzer           │
-│  └─ Code Pattern Matcher └─ Relationship Mapper           │
+│  Semantic Block Engine                                      │
+│  ├─ Block Detection       ├─ Hierarchy Navigation          │
+│  ├─ Purpose Extraction    ├─ Dependency Mapping            │
+│  └─ Context Expansion     └─ Related Code Discovery        │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Data Flow
-1. **Input**: User hovers/clicks on code symbol
-2. **Analysis**: Extract symbol + context using AST and pattern matching
-3. **Decomposition**: Break complex analysis into optimized subtasks
-4. **Routing**: Distribute tasks to appropriate AI models
-5. **Processing**: Execute AI queries with cost optimization
-6. **Aggregation**: Combine responses into coherent explanation
-7. **Memory**: Store insights in appropriate memory tier
-8. **Delivery**: Present results through interactive UI
-9. **Learning**: Incorporate user feedback for improvement
+### User Interaction Flow
+1. **Trigger**: User presses Cmd+Shift and hovers over code
+2. **Detection**: Find the smallest meaningful semantic block
+3. **Highlight**: Visual feedback showing selectable boundaries
+4. **Click**: One-click opens Codora Explorer with instant analysis
+5. **Analysis**: Show purpose, business value, and practical insights
+6. **Memory**: Cache analysis for instant future access
+7. **Navigation**: Easy jumping to related code and dependencies
+8. **Learning**: Track user behavior to improve future interactions
+
+### Example User Journey
+```
+1. User hovers over: orderService.processOrder(user, items)
+   → Highlights: Complete method call (not individual words)
+   → Preview: "Click to analyze: Order processing with validation"
+
+2. User clicks
+   → Opens Codora Explorer instantly
+   → Shows: "Validates order items, calculates total, charges payment"
+   → Details: "Throws InsufficientFundsError if payment fails"
+   → Related: Shows OrderValidator.validate() and PaymentService.charge()
+
+3. User clicks on PaymentService.charge()
+   → New tab opens with payment analysis
+   → Purpose: "Charges credit card using Stripe API with retry logic"
+   → Context: "Part of checkout flow, handles 3D Secure authentication"
+```
 
 ---
 
@@ -509,23 +570,29 @@ interface BudgetControl {
 
 ## 📈 Success Metrics
 
-### User Engagement
-- **Monthly Active Users**: Target 10K+ by end of Phase 7
-- **Session Duration**: Average 15+ minutes per exploration session
-- **Feature Adoption**: 80%+ users trying AI explanations within first week
-- **Retention Rate**: 70%+ users returning within 30 days
+### User Value Delivery
+- **Instant Understanding**: 90%+ of interactions provide immediate code comprehension
+- **Purpose Clarity**: Users can explain unfamiliar code after single interaction
+- **Reduced Context Switching**: 70%+ less jumping between files to understand code
+- **Learning Acceleration**: 60%+ faster onboarding to new codebases
+
+### Interaction Quality
+- **Semantic Accuracy**: 95%+ correct identification of what code actually does
+- **Business Context**: 85%+ explanations include why code exists, not just how
+- **Practical Insights**: 90%+ users prefer Codora explanations over reading code alone
+- **Zero Friction**: <2 seconds from Cmd+Shift hover to meaningful analysis
 
 ### Technical Performance
-- **Response Accuracy**: 95%+ factually correct explanations
-- **System Reliability**: 99.9% uptime for AI services
-- **Cost Efficiency**: <$0.10 per user per month average AI costs
-- **Performance**: <5s response time for 90% of queries
+- **Block Detection Accuracy**: 98%+ correct identification of semantic boundaries
+- **Cache Hit Rate**: 80%+ instant responses for previously analyzed code
+- **Memory Efficiency**: <50MB additional VSCode memory usage
+- **Cross-Platform**: Works identically on Mac (Cmd) and PC (Ctrl) shortcuts
 
-### Business Impact
-- **Developer Productivity**: 25% faster code understanding
-- **Learning Acceleration**: 50% reduced onboarding time
-- **Code Quality**: 30% fewer misunderstandings in code reviews
-- **Knowledge Sharing**: 80% of teams reporting improved collaboration
+### Developer Impact
+- **Code Review Speed**: 40% faster understanding of unfamiliar code in PRs
+- **Debugging Efficiency**: 50% faster identification of relevant code sections
+- **Knowledge Transfer**: 70% reduction in "what does this do?" questions in teams
+- **Confidence**: 80%+ developers feel more confident working with unfamiliar codebases
 
 ---
 
@@ -576,20 +643,42 @@ Q4 2026: Platform Ecosystem & APIs
 
 ## 🎯 Conclusion
 
-This enhanced development plan transforms Codora from a basic code exploration tool into a comprehensive AI-powered platform that revolutionizes how developers understand code. By implementing advanced AI patterns, cost optimization strategies, and multi-tier memory systems, Codora will set new standards for developer productivity and code comprehension.
+This redesigned development plan transforms Codora from syntactic parsing to semantic understanding. Every phase now focuses on delivering immediate, practical value to developers who need to understand unfamiliar code quickly.
 
-The phased approach ensures manageable development cycles while building toward enterprise-ready capabilities. The focus on cost optimization and intelligent model routing makes advanced AI accessible to individual developers and scalable for enterprise teams.
+### Key Transformation
+- **From**: "Line 45: function declaration with three parameters"
+- **To**: "Validates user input and saves order to database with error handling"
 
-**Next Steps:**
-1. Complete Phase 2: AI Configuration & Infrastructure
-2. Begin user testing and feedback collection
-3. Validate cost optimization strategies with real usage data
-4. Build community and gather enterprise requirements
+- **From**: Line-by-line meaningless analysis
+- **To**: Block-based purpose understanding with business context
+
+- **From**: Academic explanations of code structure
+- **To**: Practical insights about what code does and why it exists
+
+### User-Centric Design
+The Cmd+Shift interaction pattern puts user workflow first:
+1. **Zero Learning Curve**: Natural modifier key + hover + click
+2. **Instant Gratification**: Immediate understanding without context switching
+3. **Flow Preservation**: Non-intrusive design that doesn't break concentration
+4. **Semantic Boundaries**: Highlight meaningful blocks, not random syntax
+
+### Measurable Impact
+Success is measured by actual developer productivity gains:
+- Faster code review and debugging
+- Reduced onboarding time for new codebases
+- More confident changes to unfamiliar code
+- Better knowledge transfer in teams
+
+**Immediate Next Steps:**
+1. **User Research**: Validate the Cmd+Shift interaction pattern with real developers
+2. **Prototype**: Build semantic block detection MVP for one language (TypeScript)
+3. **Test**: Measure semantic accuracy vs current syntactic approach
+4. **Iterate**: Refine based on user feedback, not technical elegance
 
 ---
 
-*Built with ❤️ for developers who love to explore and understand code*
+*Built for developers who need to understand code faster, not analyze it academically*
 
-**Document Version**: 2.0
-**Last Updated**: 2025-09-25
-**Next Review**: End of Phase 2
+**Document Version**: 3.0 - Semantic First
+**Last Updated**: 2025-09-26
+**Next Review**: After user testing of Phase 3 prototype
