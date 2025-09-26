@@ -65,6 +65,76 @@
         "command": "codora.refreshConfig",
         "title": "🔄 Refresh Configuration",
         "category": "Codora"
+      },
+      {
+        "command": "codora.toggleInteractiveSelection",
+        "title": "🎯 Toggle Interactive Selection Mode",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.exploreSemanticBlock",
+        "title": "🔍 Explore Semantic Block",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.showMemoryStats",
+        "title": "🧠 Show Memory Statistics",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.cleanupMemory",
+        "title": "🗑️ Cleanup Memory Cache",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.showExplorationHistory",
+        "title": "📚 Show Exploration History",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.showRelatedFiles",
+        "title": "🌐 Show Related Files",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.showNavigationHistory",
+        "title": "🧭 Show Navigation History",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.getNavigationSuggestions",
+        "title": "🔍 Get Navigation Suggestions",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.showCrossFileStats",
+        "title": "📊 Show Cross-File Statistics",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.startContextSession",
+        "title": "🧠 Start Context Session",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.showContextSummary",
+        "title": "📋 Show Context Summary",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.addContextBookmark",
+        "title": "🔖 Add Context Bookmark",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.addContextAnnotation",
+        "title": "📝 Add Context Annotation",
+        "category": "Codora"
+      },
+      {
+        "command": "codora.getContextSuggestions",
+        "title": "💡 Get Context Suggestions",
+        "category": "Codora"
       }
     ],
     "configuration": {
@@ -75,9 +145,10 @@
           "enum": [
             "openai",
             "anthropic",
-            "local"
+            "local",
+            "dual"
           ],
-          "default": "openai",
+          "default": "dual",
           "description": "AI service provider for code explanations"
         },
         "codora.aiService.model": {
@@ -91,6 +162,31 @@
         "codora.aiService.anthropicKey": {
           "type": "string",
           "description": "API key for Anthropic Claude"
+        },
+        "codora.aiService.efficiencyApiKey": {
+          "type": "string",
+          "description": "API key for efficiency-focused model (for simple code analysis)"
+        },
+        "codora.aiService.performanceApiKey": {
+          "type": "string",
+          "description": "API key for performance-focused model (for complex code analysis)"
+        },
+        "codora.aiService.efficiencyModel": {
+          "type": "string",
+          "default": "gpt-3.5-turbo",
+          "description": "Model for simple/routine code analysis (cost-efficient)"
+        },
+        "codora.aiService.performanceModel": {
+          "type": "string",
+          "default": "gpt-4",
+          "description": "Model for complex code analysis (high-performance)"
+        },
+        "codora.aiService.complexityThreshold": {
+          "type": "number",
+          "default": 0.6,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Complexity threshold to switch from efficiency to performance model (0.0-1.0)"
         },
         "codora.aiService.baseUrl": {
           "type": "string",
@@ -158,6 +254,16 @@
         }
       }
     },
+    "keybindings": [
+      {
+        "command": "codora.toggleInteractiveSelection",
+        "key": "cmd+shift+e",
+        "mac": "cmd+shift+e",
+        "win": "ctrl+shift+e",
+        "linux": "ctrl+shift+e",
+        "when": "editorTextFocus"
+      }
+    ],
     "menus": {
       "editor/context": [
         {
